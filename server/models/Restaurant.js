@@ -1,12 +1,25 @@
-const mongoose =require('mongoose');
-const Schema =mongoose.Schema;
+const Mongoose = require('mongoose');
+const { Schema } = Mongoose;
 
-const restaurantSchema=new Schema({
-    name:String,
-    description:String,
-    image:String,
-    product:[],
-    rate:Number,
+// Merchant Schema
+const RestaurantSchema = new Schema({
+  name: {
+    type: String,
+    trim: true
+  },
+  email: {
+    type: String
+  },
+  description: {
+    type: String
+  },
+  brand: {
+    type: String
+  },
+  business: {
+    type: String,
+    trim: true
+  },
 });
 
-module.exports=mongoose.model('Restaurant',restaurantSchema);
+module.exports = Mongoose.model('Merchant', RestaurantSchema);

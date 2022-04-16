@@ -2,6 +2,9 @@ const graphql =require('graphql');
 const User =require('../models/User');
 const Restaurant=require('../models/Restaurant');
 const Order =require('../models/Order');
+const Cart =require('../models/cart');
+const Address =require('../models/address')
+
 const Category =require('../models/Category')
 const Product = require('../models/Product');
 
@@ -66,6 +69,22 @@ const ProductType = new GraphQLObjectType({
         category:{type:GraphQLString},
         image:{type:GraphQLString},
         price:{type:GraphQLFloat}
+    })
+});
+const adressType = new GraphQLObjectType({
+    name:'Adress',
+    fields:()=>({
+        user:{
+            type:UserType,
+            resolve(parent,args){
+                return User.findById(parent.id)
+            }
+        },
+        adress:{type:GraphQLString},
+        city:{type:GraphQLString},
+        state:{type:GraphQLString},
+        country:{type:GraphQLString},
+        zipCode:{type:GraphQLString},
     })
 });
 
@@ -162,6 +181,7 @@ const Mutation =new GraphQLObjectType({
                 let product= new Product({
                     name:args.name,
                     category:args.category,
+                    image:args.image,
                     price:args.price
 
                 });
