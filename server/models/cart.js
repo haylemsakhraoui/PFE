@@ -7,11 +7,13 @@ const CartItemSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Product'
   },
-  quantity: Number,
-  purchasePrice: {
+  qty:{ 
+    type: Number
+  },
+purchasePrice: {
     type: Number,
     default: 0
-  },
+},
   totalPrice: {
     type: Number,
     default: 0

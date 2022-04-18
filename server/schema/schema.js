@@ -88,6 +88,44 @@ const adressType = new GraphQLObjectType({
     })
 });
 
+const CartType = new GraphQLObjectType({
+    name:'Cart',
+    fields:()=>({
+       
+        product:
+            {type:new GraphQLList(ProductType),
+                resolve(parent,args){
+                return Product.find({id:parent.id})    
+                }
+        },
+         user:{
+            type:UserType,
+            resolve(parent,args){
+                return User.findById(parent.id)
+            }
+        },
+    })
+});
+
+const CartItemType = new GraphQLObjectType({
+    name:'CartItem',
+    fields:()=>({
+       product:
+            {type:new GraphQLList(ProductType),
+                resolve(parent,args){
+                return Product.find({id:parent.id})    
+                }
+        },
+         qty:{
+            type:UserType,
+            resolve(parent,args){
+                return User.findById(parent.id)
+            }
+        },
+        
+    })
+});
+
 const OrderType = new GraphQLObjectType({
     name:'Order',
     fields:()=>({
