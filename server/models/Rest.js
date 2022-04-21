@@ -6,6 +6,12 @@ const RestaurantSchema = new Schema({
             type: String,
              trim: true
            },
+           description : {
+            type: String
+         },
+         image: {
+            type : String
+             },
            products:[
                {
                 type: mongoose.Types.ObjectId,
