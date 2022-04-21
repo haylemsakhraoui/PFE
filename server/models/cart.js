@@ -1,5 +1,5 @@
-const Mongoose = require('mongoose');
-const { Schema } = Mongoose;
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
 // Cart Item Schema
 const CartItemSchema = new Schema({
@@ -33,7 +33,7 @@ purchasePrice: {
   }
 });
 
-module.exports = Mongoose.model('CartItem', CartItemSchema);
+module.exports = mongoose.model('CartItem', CartItemSchema);
 
 // Cart Schema
 const CartSchema = new Schema({
@@ -49,4 +49,4 @@ const CartSchema = new Schema({
   }
 });
 
-module.exports = Mongoose.model('Cart', CartSchema);
+module.exports = mongoose.model('Cart', CartSchema);

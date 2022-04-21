@@ -1,5 +1,5 @@
-const Mongoose = require('mongoose');
-const { Schema } = Mongoose;
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
 // Order Schema
 const OrderSchema = new Schema({
@@ -15,6 +15,7 @@ const OrderSchema = new Schema({
     type: Number,
     default: 0
   },
+
   updated: Date,
   created: {
     type: Date,
@@ -22,4 +23,4 @@ const OrderSchema = new Schema({
   }
 });
 
-module.exports = Mongoose.model('Order', OrderSchema);
+module.exports = mongoose.model('Order', OrderSchema);

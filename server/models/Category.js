@@ -1,6 +1,6 @@
-const Mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const slug = require('mongoose-slug-generator');
-const { Schema } = Mongoose;
+const { Schema } = mongoose;
 
 const options = {
   separator: '-',
@@ -8,7 +8,7 @@ const options = {
   truncate: 120
 };
 
-Mongoose.plugin(slug, options);
+mongoose.plugin(slug, options);
 
 // Category Schema
 const CategorySchema = new Schema({
@@ -50,4 +50,4 @@ const CategorySchema = new Schema({
   }
 });
 
-module.exports = Mongoose.model('Category', CategorySchema);
+module.exports = mongoose.model('Category', CategorySchema);

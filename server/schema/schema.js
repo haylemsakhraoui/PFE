@@ -1,6 +1,6 @@
 const graphql =require('graphql');
 const User =require('../models/User');
-const Restaurant=require('../models/Restaurant');
+const Restaurant=require('../models/Rest');
 const Order =require('../models/Order');
 const Cart =require('../models/cart');
 const Address =require('../models/address')
@@ -71,14 +71,22 @@ const ProductType = new GraphQLObjectType({
         price:{type:GraphQLFloat}
     })
 });
+const ProductRestaurant = new GraphQLObjectType({
+    name:'ProductRestaurant',
+    fields:()=>({
+        id:{type:GraphQLID},
+        productId:{type:GraphQLID},
+        restaurantId:{type:GraphQLID}
+    })
+});
 const adressType = new GraphQLObjectType({
     name:'Adress',
     fields:()=>({
-        user:{
-            type:UserType,
-            resolve(parent,args){
-                return User.findById(parent.id)
-            }
+        user:
+            {type:new GraphQLList(UserType),
+                resolve(parent,args){
+                return User.find({id:parent.id})    
+                }
         },
         adress:{type:GraphQLString},
         city:{type:GraphQLString},
@@ -122,7 +130,7 @@ const CartItemType = new GraphQLObjectType({
                 return User.findById(parent.id)
             }
         },
-        
+
     })
 });
 
@@ -213,7 +221,9 @@ const Mutation =new GraphQLObjectType({
                 name:{type:new GraphQLNonNull (GraphQLString)},
                 category:{type:new GraphQLNonNull (GraphQLString)},
                 image:{type:GraphQLString},
-                price:{type: new GraphQLNonNull(GraphQLFloat)}
+                price:{type: new GraphQLNonNull(GraphQLFloat)},
+                restaurantId: {type : GraphQLID}
+
             },
             resolve(parent,args){
                 let product= new Product({
@@ -223,9 +233,32 @@ const Mutation =new GraphQLObjectType({
                     price:args.price
 
                 });
-                return product.save();
+                var productSave = product.save();
+                const prodRes = new ProductRestaurant();
+                prodRes.productId = product.id;
+                prodRes.restaurantId =restaurantId;
+                prodRes.save();
+                //
+                addProductRestaurant
+                return productSave;
+                
             }
         },
+        // addProductRestaurant:{
+        //     type:ProductRestaurant,
+        //     args:{
+        //     productId :{type:GraphQLID},
+        //     restaurantId:{type:GraphQLID} 
+        //     },
+        //     resolve(parent,args){
+        //         let productRestaurant = new ProductRestaurant({
+        //             restaurantId:args.restaurantId,
+        //             productId:args.productId
+        //         });
+        //         return productRestaurant.save();
+        //     }
+
+        // },
         //ADDORDER
         addOrder:{
             type:OrderType,

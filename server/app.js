@@ -9,7 +9,7 @@ const app = express();
 
 
 
-mongoose.connect(`mongodb+srv://${USER_NAME}:${DB_PASSWORD}@${DB_NAME}.erdv9.mongodb.net/FoodDelivCluster?retryWrites=true&w=majority`)
+mongoose.connect(`mongodb+srv://VOSHS:VOSHS1999@fooddelivcluster.erdv9.mongodb.net/FoodDelivCluster?retryWrites=true&w=majority`)
 
 mongoose.connection.once('open',() => {
 console.log('connected to database')
@@ -20,7 +20,7 @@ app.use('/graphql',graphqlHTTP({
  graphiql:true
 }))
 
-app.listen(PORT,() => {
+app.listen(4000,() => {
     console.log('server is running on port 4000')
 });
 

@@ -1,5 +1,5 @@
-const Mongoose = require('mongoose');
-const { Schema } = Mongoose;
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
 
 // Product Schema
@@ -32,4 +32,4 @@ const ProductSchema = new Schema({
   }
 });
 
-module.exports = Mongoose.model('Product', ProductSchema);
+module.exports = mongoose.model('Product', ProductSchema);
